@@ -6,6 +6,9 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1">
   <title>まちカルBASE 学生自習室</title>
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -23,11 +26,12 @@
       box-shadow: 0 4px 16px #00000010;
     }
     h1 { color: #147d9c; }
-    .notice {
+    #status {
       background: #eaf3f6;
       border-radius: 10px;
       padding: 16px;
       line-height: 1.8;
+      white-space: pre-line;
     }
   </style>
 </head>
@@ -35,11 +39,47 @@
   <main class="card">
     <h1>まちカルBASE</h1>
     <h2>学生自習室 受付</h2>
-    <div class="notice">
-      受付画面の表示テスト中です。<br>
-      LINE本人認証は次の段階で設定します。<br>
-      チケットの消化は行いません。
-    </div>
+
+    <p id="status">LINE認証を確認しています...</p>
+
+    <p>現在は動作確認中です。<br>
+    チケットは消化されません。</p>
   </main>
+
+  <script>
+    const LIFF_ID = "2012068721-KJW8iAu1";
+
+    async function main() {
+      const status = document.getElementById("status");
+
+      try {
+        await liff.init({ liffId: LIFF_ID });
+
+        if (!liff.isLoggedIn()) {
+          if (liff.isInClient()) {
+            throw new Error("LINE内のログイン状態を確認できません");
+          }
+
+          status.textContent = "LINEログインへ移動します...";
+          liff.login();
+          return;
+        }
+
+        if (!liff.getIDToken()) {
+          throw new Error("IDトークンを取得できません");
+        }
+
+        status.textContent =
+          "LINEログインを確認しました。\n" +
+          "受付機能は現在準備中です。";
+
+      } catch (error) {
+        status.textContent =
+          "認証エラー：" + error.message;
+      }
+    }
+
+    main();
+  </script>
 </body>
 </html>
