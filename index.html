@@ -57,6 +57,7 @@
   
 <button
   type="button"
+  id="checkStudentIdButton"
   onclick="checkStudentId()"
   style="display: block; margin: 16px auto; padding: 12px 24px;"
 >
@@ -96,6 +97,7 @@
 
         if (!liff.getIDToken()) {
           throw new Error("IDトークンを取得できません");
+        　document.getElementById("checkStudentIdButton").disabled = false;
         }
 
         status.textContent =
