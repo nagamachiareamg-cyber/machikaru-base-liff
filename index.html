@@ -54,13 +54,17 @@
     style="padding: 12px; width: 80%; font-size: 16px;"
   >
 
-  <button
-    type="button"
-    disabled
-    style="display: block; margin: 16px auto; padding: 12px 24px;"
-  >
-    LINE連携を申請する（準備中）
-  </button>
+  
+<button
+  type="button"
+  onclick="checkStudentId()"
+  style="display: block; margin: 16px auto; padding: 12px 24px;"
+>
+  学生IDを確認する
+</button>
+
+<p id="studentIdMessage" style="font-size: 14px;"></p>
+
 
   <p style="font-size: 13px; color: #666;">
     ※申請後、管理者の承認が必要です。
@@ -106,5 +110,29 @@
 
     main();
   </script>
+ 
+<script>
+  function checkStudentId() {
+    const input = document.getElementById("studentId");
+    const message = document.getElementById("studentIdMessage");
+
+    const studentId = input.value.trim().toUpperCase();
+    input.value = studentId;
+
+    if (!studentId) {
+      message.textContent = "学生IDを入力してください。";
+      return;
+    }
+
+    if (!/^ST[0-9]+$/.test(studentId)) {
+      message.textContent = "学生IDは ST001 のように入力してください。";
+      return;
+    }
+
+    message.textContent =
+      "入力形式を確認しました。LINE連携申請はまだ送信されません。";
+  }
+</script>
+ 
 </body>
 </html>
