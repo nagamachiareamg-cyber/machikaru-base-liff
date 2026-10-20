@@ -244,8 +244,22 @@
       return;
     }
 
+    
+    document.getElementById("confirmStudentName").textContent =
+      "氏名：" + name;
+
+    document.getElementById("confirmStudentSchool").textContent =
+      "学校名：" + school;
+
+    document.getElementById("confirmStudentGrade").textContent =
+      "学年：" + grade;
+
+    document.getElementById("newStudentConfirmation").style.display =
+      "block";
+
     message.textContent =
-      "入力内容を確認しました。現在は準備中のため、登録情報は送信されません。";
+      "入力内容をご確認ください。現在は準備中のため、登録情報は送信されません。";
+
   }
 </script>
 
