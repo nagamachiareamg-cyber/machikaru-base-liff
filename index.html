@@ -200,6 +200,13 @@
  
 <script>
   function checkNewStudentRegistration() {
+    
+    if (!liff.isLoggedIn() || !liff.getIDToken()) {
+      document.getElementById("newStudentMessage").textContent =
+        "LINEログインを確認できません。";
+      return;
+    }
+
     const name = document
       .getElementById("newStudentName").value.trim();
 
