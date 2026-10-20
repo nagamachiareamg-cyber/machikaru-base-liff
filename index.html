@@ -209,6 +209,19 @@
 </script>
  
 <script>
+  
+function hideStudentConfirmation() {
+  document.getElementById("newStudentConfirmation").style.display = "none";
+  document.getElementById("newStudentMessage").textContent = "";
+}
+
+["newStudentName", "newStudentSchool", "newStudentGrade"].forEach(function(id) {
+  document.getElementById(id).addEventListener(
+    "input",
+    hideStudentConfirmation
+  );
+});
+
   function checkNewStudentRegistration() {
     
     if (!liff.isLoggedIn() || !liff.getIDToken()) {
