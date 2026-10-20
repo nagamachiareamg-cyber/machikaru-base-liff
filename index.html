@@ -111,13 +111,17 @@
     <option>その他</option>
   </select>
 
-  <button
-    type="button"
-    disabled
-    style="display: block; margin: 20px auto; padding: 12px 24px;"
-  >
-    新規登録する（準備中）
-  </button>
+
+<button
+  type="button"
+  onclick="checkNewStudentRegistration()"
+  style="display: block; margin: 20px auto; padding: 12px 24px;"
+>
+  入力内容を確認する
+</button>
+
+<p id="newStudentMessage" style="font-size: 14px;"></p>
+
 
   <p style="font-size: 13px; color: #666;">
     ※現在は準備中です。登録情報は送信されません。
@@ -194,5 +198,39 @@
   }
 </script>
  
+<script>
+  function checkNewStudentRegistration() {
+    const name = document
+      .getElementById("newStudentName").value.trim();
+
+    const school = document
+      .getElementById("newStudentSchool").value.trim();
+
+    const grade = document
+      .getElementById("newStudentGrade").value;
+
+    const message = document
+      .getElementById("newStudentMessage");
+
+    if (!name) {
+      message.textContent = "氏名を入力してください。";
+      return;
+    }
+
+    if (!school) {
+      message.textContent = "学校名を入力してください。";
+      return;
+    }
+
+    if (!grade) {
+      message.textContent = "学年を選択してください。";
+      return;
+    }
+
+    message.textContent =
+      "入力内容を確認しました。現在は準備中のため、登録情報は送信されません。";
+  }
+</script>
+
 </body>
 </html>
