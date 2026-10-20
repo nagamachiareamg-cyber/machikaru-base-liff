@@ -238,6 +238,20 @@ function hideStudentConfirmation() {
   );
 });
 
+function showStudentRegistrationResult(studentId) {
+  const result = document.getElementById(
+    "studentRegistrationResult"
+  );
+
+  result.textContent =
+    "学生登録申請を受け付けました。\n" +
+    "学生ID：" + studentId + "\n" +
+    "管理者の承認をお待ちください。";
+
+  result.style.whiteSpace = "pre-line";
+  result.style.display = "block";
+}
+
   function checkNewStudentRegistration() {
     
     if (!liff.isLoggedIn() || !liff.getIDToken()) {
